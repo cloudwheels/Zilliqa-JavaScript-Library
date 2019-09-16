@@ -445,6 +445,29 @@ export class Blockchain implements ZilliqaModule {
   }
 
   /**
+   * getSmartContractSubState
+   *
+   * Note : Waiting for https://github.com/Zilliqa/Zilliqa/pull/1872
+   * @param {string} address
+   * @param {string} variableName - Name of the variable in the Smart Contract
+   * @param {string} indices - If the variable is of map type, you can specify an index (or indices)
+   * @returns {Promise<RPCResponse<Value[], string>>}
+   */
+  getSmartContractSubState(
+    addr: string,
+    variableName: string,
+    indices: string,
+  ): Promise<RPCResponse<Value[], string>> {
+    const address = validation.isBech32(addr) ? fromBech32Address(addr) : addr;
+    return this.provider.send(
+      RPCMethod.GetSmartContractSubState,
+      address.replace('0x', '').toLowerCase(),
+      variableName,
+      indices,
+    );
+  }
+
+  /**
    * getSmartContracts
    *
    * @param {string} address

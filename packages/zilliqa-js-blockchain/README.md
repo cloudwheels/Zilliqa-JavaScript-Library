@@ -290,3 +290,18 @@ Gets a paginated list of Tx blocks.
 **Returns**
 
 - `Promise<RPCResponse<BlockList, string>>`
+
+
+### `getSmartContractSubState(variableName : string, indices: string): Promise<any>`
+
+Retrieve the state (or part of it) of a contract. https://apidocs.zilliqa.com/#getsmartcontractsubstate
+Only works for zilliqa network 5.0 onwards
+
+**Parameters**
+
+- `variableName`: The variable name in your smart contract
+- `indices`: If the variable is of map type, you can specify an index (or indices)
+ 
+**Returns**
+
+- `Promise<any>` - the Contract state.

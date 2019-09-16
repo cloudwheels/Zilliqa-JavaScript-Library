@@ -232,7 +232,7 @@ _This API is unstable and subject to breaking changes pre-main net_
 - `Promise<Transaction>` - the Transaction that has been signed and broadcast
   to the network.
 
-### `getState(): Promise<State>`
+### `getState(): Promise<any>`
 
 Queries the blockchain for the smart contract's state. Note that this method
 will return the _entire_ state of the smart contract. As a result, if you have
@@ -247,4 +247,20 @@ None
 
 **Returns**
 
-- `Promise<State>` - the Contract state.
+- `Promise<any>` - the Contract state.
+
+
+### `getSubState(variableName : string, indices: string): Promise<any>`
+
+Retrieve the state (or part of it) of a contract. https://apidocs.zilliqa.com/#getsmartcontractsubstate
+
+P.S: As of `zilliqa-js 0.8.0` onwards, `getState` function is only compatible with zilliqa 5.0.0 onwards.
+
+**Parameters**
+
+- `variableName`: The variable name in your smart contract
+- `indices`: If the variable is of map type, you can specify an index (or indices)
+ 
+**Returns**
+
+- `Promise<any>` - the Contract state.

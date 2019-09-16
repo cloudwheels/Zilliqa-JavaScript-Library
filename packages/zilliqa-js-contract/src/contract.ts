@@ -229,7 +229,7 @@ export class Contract {
     }
   }
 
-  async getState(): Promise<State> {
+  async getState(): Promise<any> {
     if (this.status !== ContractStatus.Deployed) {
       return Promise.resolve([]);
     }
@@ -258,6 +258,25 @@ export class Contract {
     const response = await this.provider.send(
       'GetSmartContractInit',
       this.address.replace('0x', '').toLowerCase(),
+    );
+
+    return response.result;
+  }
+
+  async getSubState(variableName: string, indices: string): Promise<any> {
+    if (this.status !== ContractStatus.Deployed) {
+      return Promise.resolve([]);
+    }
+
+    if (!this.address) {
+      throw new Error('Cannot get state of uninitialised contract');
+    }
+
+    const response = await this.provider.send(
+      RPCMethod.GetSmartContractSubState,
+      this.address.replace('0x', '').toLowerCase(),
+      variableName,
+      indices,
     );
 
     return response.result;
